@@ -1,8 +1,8 @@
-﻿using AdminMVC.Models;
+﻿using Models.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace AdminMVC.Data
+namespace Models.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

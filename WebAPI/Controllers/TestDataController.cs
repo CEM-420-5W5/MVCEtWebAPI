@@ -1,5 +1,5 @@
-using AdminMVC.Data;
-using AdminMVC.Models;
+using Models.Data;
+using Models.Models;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

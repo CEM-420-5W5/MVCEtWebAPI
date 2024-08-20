@@ -1,4 +1,4 @@
-using AdminMVC.Data;
+using Models.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
