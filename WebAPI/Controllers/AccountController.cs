@@ -10,6 +10,7 @@ using System.Numerics;
 using System.Security.Claims;
 using System.Text;
 using Super_Cartes_Infinies.Models.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
@@ -58,7 +59,7 @@ namespace WebAPI.Controllers
 
                 string tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
-                return Ok(tokenString);
+                return Ok(new LoginSuccessDTO() { Token = tokenString });
             }
 
             return NotFound(new { Error = "L'utilisateur est introuvable ou le mot de passe ne concorde pas" });
@@ -76,7 +77,7 @@ namespace WebAPI.Controllers
 
             IdentityUser user = new IdentityUser()
             {
-                UserName = registerDTO.UserName,
+                UserName = registerDTO.Username,
                 Email = registerDTO.Email
             };
             IdentityResult identityResult = await _userManager.CreateAsync(user, registerDTO.Password);
@@ -86,7 +87,25 @@ namespace WebAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Error = identityResult.Errors });
             }
 
-            return await Login(new LoginDTO() { UserName = registerDTO.UserName, Password = registerDTO.Password });
+            return Ok();
+            //return await Login(new LoginDTO() { UserName = registerDTO.UserName, Password = registerDTO.Password });
+        }
+
+        // Note:
+        // Il n'y a pas de méthode LogOut! Une fois que le token est généré, il reste valide! Si le client veut faire un "logout", il doit simplement oublier son Token!
+
+
+        [HttpGet]
+        public ActionResult PublicTest()
+        {
+            return Ok(new string[] {"Pomme", "Poire", "Banane"});
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult PrivateTest()
+        {
+            return Ok(new string[] { "PrivatePomme", "PrivatePoire", "PrivateBanane" });
         }
     }
 }
