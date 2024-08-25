@@ -26,15 +26,13 @@ namespace WebAPI.Controllers
         }
 
         [Authorize]
-        [HttpGet("{name}")]
-        public ActionResult<TestData> CreateData(string name)
+        [HttpPost]
+        public ActionResult<TestData> CreateData(CreateTestDataDTO data)
         {
-            TestData testData = new TestData() { Name = name };
+            TestData testData = new TestData() { Name = data.Name };
             _dbContext.TestDatas.Add(testData);
             _dbContext.SaveChanges();
             return testData;
         }
-
-        
     }
 }
