@@ -18,18 +18,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-string clientAdress = "https://localhost:4200";
 string serverAdress = "https://localhost:7263";
 SymmetricSecurityKey signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("C'est tellement la meilleure cle qui a jamais ete cree dans l'histoire de l'humanite (doit etre longue)"));
-
-if (builder.Environment.IsDevelopment())
-{
-    serverAdress = "https://localhost:7263";
-}
-else
-{
-    serverAdress = "https://wonderful-tree-0ccc8c610.4.azurestaticapps.net";
-}
 
 builder.Services.AddAuthentication(options =>
 {
@@ -55,6 +45,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+// Ajout d'un support pour les tokens dans Swagger
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });
