@@ -18,7 +18,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-string serverAdress = "https://localhost:7263";
+string serverAdress = "http://localhost:5011";
 SymmetricSecurityKey signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("C'est tellement la meilleure cle qui a jamais ete cree dans l'histoire de l'humanite (doit etre longue)"));
 
 builder.Services.AddAuthentication(options =>
@@ -78,7 +78,7 @@ builder.Services.AddSwaggerGen(opt =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", builder => builder
-        .WithOrigins("https://localhost:4200", "http://localhost:4200")
+        .WithOrigins("https://localhost:3000", "http://localhost:3000")
         .AllowAnyMethod()
         .AllowAnyHeader());
 });
