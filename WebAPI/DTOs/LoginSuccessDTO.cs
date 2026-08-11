@@ -10,5 +10,8 @@ namespace Super_Cartes_Infinies.Models.Dtos
     {
         [Required]
         public string Token { get; set; } = "";
+        [Required]
+        public string Username { get; set; } = "";
+        
     }
 }
