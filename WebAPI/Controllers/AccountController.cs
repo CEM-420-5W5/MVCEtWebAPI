@@ -95,7 +95,12 @@ namespace WebAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Error = identityResult.Errors });
             }
 
-            return Ok();
+            var loginDTO = new LoginDTO() {
+                Username = registerDTO.Username,
+                Password = registerDTO.Password
+            };
+
+            return await Login(loginDTO);
         }
     }
 }
